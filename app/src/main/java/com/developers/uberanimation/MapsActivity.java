@@ -58,11 +58,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     SupportMapFragment mapFragment;
     private GoogleMap mMap;
     private List<LatLng> polyLineList;
-    private Marker marker;
+    private Marker carMarker;
     private float v;
     private double lat, lng;
     private Handler handler;
-    private LatLng startPosition, endPosition;
+    private LatLng startPostion, endPosition;
     private int index, next;
     private Button button;
     private EditText destinationEditText;
@@ -80,32 +80,37 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     Runnable drawPathRunnable = new Runnable() {
         @Override
         public void run() {
-            if(index < polyLineList.size()-1){
-                index++;
-                next = index+1;
-            }
-            if(index < polyLineList.size()-1){
-                startPosition = polyLineList.get(index);
-                endPosition = polyLineList.get(index);
-            }
-            ValueAnimator valueAnimator = ValueAnimator.ofFloat(0,1);
-            valueAnimator.setDuration(3000); //3 sec
-            valueAnimator.setInterpolator(new LinearInterpolator());
-            valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                @Override
-                public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                    v = valueAnimator.getAnimatedFraction();
-                    lng = v*endPosition.longitude+(1-v)*startPosition.longitude;
-                    lat = v*endPosition.latitude+(1-v)*startPosition.latitude;
-                    LatLng newPos = new LatLng(lat,lng);
-                    marker.setPosition(newPos);
-                    marker.setAnchor(0.5f,0.5f);
-                    marker.setRotation(getBearing(startPosition,newPos));
-                    mMap.moveCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder().target(newPos).zoom(15.5f).build()));
+                if (index < polyLineList.size()- 1) {
+                    index++;
+                    next = index+1;
                 }
-            });
-            valueAnimator.start();
-            handler.postDelayed(this,3000);
+                if (index < polyLineList.size()- 1) {
+                    startPostion = polyLineList.get(index);
+                    endPosition = polyLineList.get(next);
+                }
+                ValueAnimator valueAnimator = ValueAnimator.ofFloat(0,1);
+                valueAnimator.setDuration(3000);
+                valueAnimator.setInterpolator(new LinearInterpolator());
+                valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                    @Override
+                    public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                        v = valueAnimator.getAnimatedFraction();
+                        lng = v*endPosition.longitude+(1-v)*startPostion.longitude;
+                        lat = v*endPosition.latitude+(1-v)*startPostion.latitude;
+                        LatLng newPos = new LatLng(lat,lng);
+                        carMarker.setPosition(newPos);
+                        carMarker.setAnchor(0.5f,0.5f);
+                        carMarker.setRotation(getBearing(startPostion,newPos));
+                        mMap.moveCamera(CameraUpdateFactory.newCameraPosition(
+                                new CameraPosition.Builder()
+                                        .target(newPos)
+                                        .zoom(15.5f)
+                                        .build()
+                        ));
+                    }
+                });
+                valueAnimator.start();
+                handler.postDelayed(this, 3000);
         }
     };
 
@@ -224,7 +229,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         });
                         //add car marker
                         polyLineAnimator.start();
-                        marker = mMap.addMarker(new MarkerOptions().position(sydney).flat(true)
+                        carMarker = mMap.addMarker(new MarkerOptions().position(sydney).flat(true)
                                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_car)));
 
                         //car moving
