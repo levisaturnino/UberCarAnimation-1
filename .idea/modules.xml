@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://D:\workSpace_Android\ProyectosSimilaresParking\UberCarAnimation-master\UberAnimation.iml" filepath="D:\workSpace_Android\ProyectosSimilaresParking\UberCarAnimation-master\UberAnimation.iml" />
       <module fileurl="file://$PROJECT_DIR$/UberCarAnimation-master.iml" filepath="$PROJECT_DIR$/UberCarAnimation-master.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>

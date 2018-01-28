@@ -3,6 +3,7 @@ package com.developers.uberanimation;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
+import android.content.Intent;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.Handler;
@@ -64,7 +65,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private Handler handler;
     private LatLng startPostion, endPosition;
     private int index, next;
-    private Button button;
+    private Button button,nextMaps;
     private EditText destinationEditText;
     private String destination;
     private PolylineOptions polylineOptions, blackPolylineOptions;
@@ -126,12 +127,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         polyLineList = new ArrayList<>();
         button = findViewById(R.id.destination_button);
         destinationEditText =  findViewById(R.id.edittext_place);
+        nextMaps = findViewById(R.id.nextButton);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 destination = destinationEditText.getText().toString();
                 destination = destination.replace(" ", "+");
                 mapFragment.getMapAsync(MapsActivity.this);
+            }
+        });
+        nextMaps.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent =  new Intent(MapsActivity.this,MapsActivity2.class);
+                startActivity(intent);
             }
         });
         mService = Common.getGoogleAPI();

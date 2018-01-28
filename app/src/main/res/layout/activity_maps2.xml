@@ -9,7 +9,7 @@
         android:orientation="horizontal">
 
         <EditText
-            android:id="@+id/edittext_place"
+            android:id="@+id/edittext_place2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -17,14 +17,13 @@
             android:hint="Enter Place" />
 
         <Button
-            android:id="@+id/destination_button"
+            android:id="@+id/destination_button2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_weight="1"
             android:text="GO" />
     </LinearLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -32,17 +31,21 @@
         android:weightSum="6">
         <fragment xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
-            android:id="@+id/map"
+            android:id="@+id/map2"
             android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            tools:context="com.developers.uberanimation.MapsActivity" />
+            tools:context="com.developers.uberanimation.MapsActivity2" />
         <Button
-            android:id="@+id/nextButton"
+            android:id="@+id/backButton"
             android:layout_weight="5"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="next button"  />
+            android:text="back button"  />
     </LinearLayout>
+
 </LinearLayout>
+
+
+
